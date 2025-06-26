@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Usuario - Quantum Tour</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+:root {
+--primary-color: #6366f1;
+--secondary-color: #8b5cf6;
+--accent-color: #f59e0b;
+--success-color: #10b981;
+--danger-color: #ef4444;
+--warning-color: #f59e0b;
+--dark-bg: #0f172a;
+--dark-surface: #1e293b;
+--dark-card: #334155;
+--text-primary: #f8fafc;
+--text-secondary: #cbd5e1;
+--text-muted: #94a3b8;
+--border-color: #475569;
+--gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+body {
+font-family: "Montserrat", sans-serif;
+background: var(--dark-bg);
+color: var(--text-primary);
+line-height: 1.6;
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 2rem;
+}
+
+.header {
+text-align: center;
+margin-bottom: 3rem;
+padding: 3rem 0;
+background: var(--gradient-primary);
+border-radius: 1rem;
+}
+
+.header h1 {
+font-size: 3rem;
+margin-bottom: 1rem;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 1rem;
+}
+
+.header p {
+font-size: 1.2rem;
+opacity: 0.9;
+}
+
+.toc {
+background: var(--dark-surface);
+border-radius: 1rem;
+padding: 2rem;
+margin-bottom: 3rem;
+border: 1px solid var(--border-color);
+}
+
+.toc h2 {
+margin-bottom: 1.5rem;
+color: var(--primary-color);
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+
+.toc ul {
+list-style: none;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 1rem;
+}
+
+.toc li {
+background: var(--dark-card);
+border-radius: 0.5rem;
+padding: 1rem;
+border: 1px solid var(--border-color);
+transition: all 0.3s ease;
+}
+
+.toc li:hover {
+border-color: var(--primary-color);
+transform: translateY(-2px);
+}
+
+.toc a {
+color: var(--text-primary);
+text-decoration: none;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+font-weight: 500;
+}
+
+.section {
+background: var(--dark-surface);
+border-radius: 1rem;
+padding: 2.5rem;
+margin-bottom: 2rem;
+border: 1px solid var(--border-color);
+}
+
+.section h2 {
+color: var(--primary-color);
+margin-bottom: 1.5rem;
+font-size: 2rem;
+display: flex;
+align-items: center;
+gap: 0.75rem;
+border-bottom: 2px solid var(--border-color);
+padding-bottom: 1rem;
+}
+
+.section h3 {
+color: var(--accent-color);
+margin: 2rem 0 1rem 0;
+font-size: 1.4rem;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+
+.section h4 {
+color: var(--text-primary);
+margin: 1.5rem 0 0.75rem 0;
+font-size: 1.1rem;
+}
+
+.step-list {
+counter-reset: step-counter;
+list-style: none;
+margin: 1.5rem 0;
+}
+
+.step-list li {
+counter-increment: step-counter;
+background: var(--dark-card);
+border-radius: 0.75rem;
+padding: 1.5rem;
+margin-bottom: 1rem;
+border: 1px solid var(--border-color);
+position: relative;
+padding-left: 4rem;
+}
+
+.step-list li::before {
+content: counter(step-counter);
+position: absolute;
+left: 1rem;
+top: 1.5rem;
+background: var(--primary-color);
+color: white;
+width: 2rem;
+height: 2rem;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 600;
+font-size: 0.9rem;
+}
+
+.feature-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 1.5rem;
+margin: 2rem 0;
+}
+
+.feature-card {
+background: var(--dark-card);
+border-radius: 0.75rem;
+padding: 1.5rem;
+border: 1px solid var(--border-color);
+transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+border-color: var(--primary-color);
+transform: translateY(-2px);
+box-shadow: var(--shadow-lg);
+}
+
+.feature-card h4 {
+color: var(--primary-color);
+margin-bottom: 1rem;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+
+.alert {
+padding: 1.5rem;
+border-radius: 0.75rem;
+margin: 1.5rem 0;
+border: 1px solid;
+display: flex;
+align-items: flex-start;
+gap: 1rem;
+}
+
+.alert-info {
+background: rgba(99, 102, 241, 0.1);
+border-color: var(--primary-color);
+color: var(--primary-color);
+}
+
+.alert-success {
+background: rgba(16, 185, 129, 0.1);
+border-color: var(--success-color);
+color: var(--success-color);
+}
+
+.alert-warning {
+background: rgba(245, 158, 11, 0.1);
+border-color: var(--warning-color);
+color: var(--warning-color);
+}
+
+.alert-danger {
+background: rgba(239, 68, 68, 0.1);
+border-color: var(--danger-color);
+color: var(--danger-color);
+}
+
+.code-block {
+background: #1a1a1a;
+border-radius: 0.5rem;
+padding: 1.5rem;
+margin: 1rem 0;
+border: 1px solid var(--border-color);
+font-family: 'Courier New', monospace;
+font-size: 0.9rem;
+overflow-x: auto;
+}
+
+.screenshot {
+background: var(--dark-card);
+border-radius: 0.75rem;
+padding: 2rem;
+margin: 1.5rem 0;
+border: 2px dashed var(--border-color);
+text-align: center;
+color: var(--text-muted);
+font-style: italic;
+}
+
+.screenshot i {
+font-size: 3rem;
+margin-bottom: 1rem;
+display: block;
+color: var(--primary-color);
+}
+
+.btn {
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+padding: 0.75rem 1.5rem;
+background: var(--primary-color);
+color: white;
+text-decoration: none;
+border-radius: 0.5rem;
+font-weight: 600;
+transition: all 0.3s ease;
+border: none;
+cursor: pointer;
+font-family: inherit;
+}
+
+.btn:hover {
+background: var(--secondary-color);
+transform: translateY(-2px);
+}
+
+.btn-secondary {
+background: var(--dark-card);
+border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+background: var(--primary-color);
+border-color: var(--primary-color);
+}
+
+.table {
+width: 100%;
+border-collapse: collapse;
+margin: 1.5rem 0;
+background: var(--dark-card);
+border-radius: 0.75rem;
+overflow: hidden;
+border: 1px solid var(--border-color);
+}
+
+.table th {
+background: var(--primary-color);
+color: white;
+padding: 1rem;
+text-align: left;
+font-weight: 600;
+}
+
+.table td {
+padding: 1rem;
+border-bottom: 1px solid var(--border-color);
+}
+
+.table tr:last-child td {
+border-bottom: none;
+}
+
+.footer {
+text-align: center;
+margin-top: 4rem;
+padding: 2rem;
+background: var(--dark-surface);
+border-radius: 1rem;
+border: 1px solid var(--border-color);
+}
+
+.footer p {
+color: var(--text-muted);
+margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+.container {
+padding: 1rem;
+}
+
+.header h1 {
+font-size: 2rem;
+flex-direction: column;
+gap: 0.5rem;
+}
+
+.section {
+padding: 1.5rem;
+}
+
+.toc ul {
+grid-template-columns: 1fr;
+}
+
+.feature-grid {
+grid-template-columns: 1fr;
+}
+}
+
+/* Smooth scrolling */
+html {
+scroll-behavior: smooth;
+}
+
+/* Highlight target section */
+.section:target {
+border-color: var(--primary-color);
+box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+</style>
+</head>
+<body>
+<div class="container">
+<!-- Header -->
+<div class="header">
+<h1>
+<i class="fas fa-globe-americas"></i>
+Manual de Usuario
+<br>
+<span style="font-size: 0.7em;">Quantum Tour</span>
+</h1>
+<p>Guía completa para usar el sistema de reservas de viajes</p>
+</div>
+
+<!-- Tabla de Contenidos -->
+<div class="toc">
+<h2><i class="fas fa-list"></i> Tabla de Contenidos</h2>
+<ul>
+<li><a href="#introduccion"><i class="fas fa-info-circle"></i> Introducción</a></li>
+<li><a href="#registro"><i class="fas fa-user-plus"></i> Registro y Login</a></li>
+<li><a href="#navegacion"><i class="fas fa-compass"></i> Navegación</a></li>
+<li><a href="#productos"><i class="fas fa-suitcase-rolling"></i> Explorar Paquetes</a></li>
+<li><a href="#carrito"><i class="fas fa-shopping-cart"></i> Carrito de Compras</a></li>
+<li><a href="#checkout"><i class="fas fa-credit-card"></i> Proceso de Pago</a></li>
+<li><a href="#consultas"><i class="fas fa-envelope"></i> Enviar Consultas</a></li>
+<li><a href="#emails"><i class="fas fa-mail-bulk"></i> Sistema de Emails</a></li>
+<li><a href="#admin"><i class="fas fa-cog"></i> Panel Administrativo</a></li>
+<li><a href="#soporte"><i class="fas fa-life-ring"></i> Soporte Técnico</a></li>
+</ul>
+</div>
+
+<!-- Introducción -->
+<div id="introduccion" class="section">
+<h2><i class="fas fa-info-circle"></i> Introducción</h2>
+
+<p>Bienvenido a <strong>Quantum Tour</strong>, tu plataforma completa para reservar experiencias de viaje extraordinarias. Este manual te guiará paso a paso para aprovechar al máximo todas las funcionalidades del sistema.</p>
+
+<h3><i class="fas fa-star"></i> Características Principales</h3>
+<div class="feature-grid">
+<div class="feature-card">
+<h4><i class="fas fa-globe-americas"></i> Catálogo de Paquetes</h4>
+<p>Explora más de 50 destinos con paquetes personalizados para todos los gustos y presupuestos.</p>
+</div>
+<div class="feature-card">
+<h4><i class="fas fa-shopping-cart"></i> Carrito Inteligente</h4>
+<p>Agrega múltiples paquetes, modifica cantidades y gestiona tu compra de forma sencilla.</p>
+</div>
+<div class="feature-card">
+<h4><i class="fas fa-credit-card"></i> Pago Seguro</h4>
+<p>Sistema de pago simulado con validaciones completas y confirmación por email.</p>
+</div>
+<div class="feature-card">
+<h4><i class="fas fa-envelope"></i> Consultas Directas</h4>
+<p>Envía consultas personalizadas y recibe respuestas de nuestros expertos en viajes.</p>
+</div>
+<div class="feature-card">
+<h4><i class="fas fa-mobile-alt"></i> Diseño Responsive</h4>
+<p>Accede desde cualquier dispositivo: computadora, tablet o móvil.</p>
+</div>
+<div class="feature-card">
+<h4><i class="fas fa-shield-alt"></i> Seguridad Total</h4>
+<p>Tus datos están protegidos con las mejores prácticas de seguridad web.</p>
+</div>
+</div>
+
+<div class="alert alert-info">
+<i class="fas fa-lightbulb"></i>
+<div>
+<strong>Consejo:</strong> Este sistema está diseñado para ser intuitivo. Si tienes dudas, busca los iconos <i class="fas fa-question-circle"></i> que te darán ayuda contextual.
+</div>
+</div>
+</div>
+
+<!-- Registro y Login -->
+<div id="registro" class="section">
+<h2><i class="fas fa-user-plus"></i> Registro y Login</h2>
+
+<h3><i class="fas fa-user-plus"></i> Crear una Cuenta Nueva</h3>
+<ol class="step-list">
+<li>
+<strong>Acceder al formulario:</strong> Haz clic en "Registrarse" en la barra de navegación superior.
+</li>
+<li>
+<strong>Completar datos:</strong> Llena todos los campos obligatorios marcados con asterisco (*):
+<ul style="margin-top: 0.5rem;">
+<li>Nombre completo</li>
+<li>Email válido</li>
+<li>Teléfono (opcional)</li>
+<li>Contraseña (mínimo 6 caracteres)</li>
+<li>Confirmar contraseña</li>
+</ul>
+</li>
+<li>
+<strong>Validación:</strong> El sistema validará automáticamente que:
+<ul style="margin-top: 0.5rem;">
+<li>El email no esté registrado previamente</li>
+<li>Las contraseñas coincidan</li>
+<li>Todos los campos obligatorios estén completos</li>
+</ul>
+</li>
+<li>
+<strong>Confirmación:</strong> Al registrarte exitosamente, podrás iniciar sesión inmediatamente.
+</li>
+</ol>
+
+<h3><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</h3>
+<ol class="step-list">
+<li>
+<strong>Acceder:</strong> Haz clic en "Ingresar" en la navegación superior.
+</li>
+<li>
+<strong>Credenciales:</strong> Ingresa tu email y contraseña registrados.
+</li>
+<li>
+<strong>Acceso:</strong> Una vez autenticado, serás redirigido al inicio con tu sesión activa.
+</li>
+</ol>
+
+<div class="alert alert-warning">
+<i class="fas fa-key"></i>
+<div>
+<strong>Cuentas de Prueba Disponibles:</strong><br>
+• <strong>Admin:</strong> admin@turismo.com / password<br>
+• <strong>Vendedor:</strong> vendedor@turismo.com / password<br>
+• <strong>Cliente:</strong> cliente@email.com / password
+</div>
+</div>
+
+<h4>Tipos de Usuario</h4>
+<table class="table">
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Permisos</th>
+<th>Funcionalidades</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cliente</strong></td>
+<td>Básicos</td>
+<td>Comprar paquetes, enviar consultas, ver historial</td>
+</tr>
+<tr>
+<td><strong>Vendedor</strong></td>
+<td>Intermedios</td>
+<td>Todo lo de cliente + acceso a panel administrativo</td>
+</tr>
+<tr>
+<td><strong>Admin</strong></td>
+<td>Completos</td>
+<td>Control total del sistema, gestión de usuarios y productos</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- Navegación -->
+<div id="navegacion" class="section">
+<h2><i class="fas fa-compass"></i> Navegación del Sistema</h2>
+
+<h3><i class="fas fa-bars"></i> Barra de Navegación</h3>
+<p>La barra superior contiene todos los enlaces principales:</p>
+
+<div class="feature-grid">
+<div class="feature-card">
+<h4><i class="fas fa-home"></i> Inicio</h4>
+<p>Página principal con paquetes destacados, características y formulario de consultas.</p>
+</div>
+<div class="feature-card">
+<h4><i class="fas fa-suitcase-rolling"></i> Paquetes</h4>
+<p>Catálogo completo con filtros por categoría y búsqueda por texto.</p>
+</div>
+<div class="feature-card">
+<h4><i class="fas fa-shopping-cart"></i> Carrito</h4>
+<p>Gestiona tus productos seleccionados antes de la compra (solo usuarios logueados).</p>
+</div>
+<div class="feature-card">
+<h4><i class="fas fa-cog"></i> Admin</h4>
+<p>Panel administrativo (solo vendedores y administradores).</p>
+</div>
+</div>
+
+<h3><i class="fas fa-mobile-alt"></i> Navegación Móvil</h3>
+<ol class="step-list">
+<li>
+<strong>Menú hamburguesa:</strong> En dispositivos móviles, el menú se colapsa en un ícono de tres líneas.
+</li>
+<li>
+<strong>Activación:</strong> Toca el ícono para desplegar el menú completo.
+</li>
+<li>
+<strong>Navegación:</strong> Selecciona cualquier opción para navegar.
+</li>
+</ol>
+
+<div class="alert alert-info">
+<i class="fas fa-info-circle"></i>
+<div>
+<strong>Tip de Navegación:</strong> El sistema recuerda tu última página visitada y te mantiene logueado durante tu sesión.
+</div>
+</div>
+</div>
+
+<!-- Productos -->
+<div id="productos" class="section">
+<h2><i class="fas fa-suitcase-rolling"></i> Explorar Paquetes Turísticos</h2>
+
+<h3><i class="fas fa-search"></i> Búsqueda y Filtros</h3>
+<ol class="step-list">
+<li>
+<strong>Acceder al catálogo:</strong> Ve a "Paquetes" en la navegación principal.
+</li>
+<li>
+<strong>Usar filtros:</strong>
+<ul style="margin-top: 0.5rem;">
+<li><strong>Búsqueda por texto:</strong> Busca por destino, nombre del paquete o descripción</li>
+<li><strong>Filtro por categoría:</strong> Hotel, Vuelo, Paquete, Auto, Excursión</li>
+</ul>
+</li>
+<li>
+<strong>Aplicar filtros:</strong> Haz clic en "Filtrar" para ver los resultados.
+</li>
+<li>
+<strong>Limpiar filtros:</strong> Usa "Limpiar" para volver a ver todos los productos.
+</li>
+</ol>
+
+<h3><i class="fas fa-eye"></i> Información de Productos</h3>
+<p>Cada tarjeta de producto muestra:</p>
+<div class="feature-grid">
+<div class="feature-card">
+<h4><i class="fas fa-image"></i> Imagen de Fondo</h4>
+<p>Fotografía representativa del destino o tipo de paquete.</p>
+</div>
+<div class="feature-card">
+<h4><i class="fas fa-tag"></i> Categoría</h4>
+<p>Tipo de producto: Paquete, Hotel, Vuelo, Auto, Excursión.</p>
+</div>
+<div class="feature-card">
+<h4><i class="fas fa-calendar-alt"></i> Duración</h4>
+<p>Cantidad de días del paquete o estadía.</p>
+</div>
+<div class="feature-card">
+<h4><i class="fas fa-map-marker-alt"></i> Destino</h4>
+<p>Ubicación geográfica del viaje.</p>
+</div>
+<div class="feature-card">
+<h4><i class="fas fa-dollar-sign"></i> Precio</h4>
+<p>Costo total del paquete en pesos argentinos.</p>
+</div>
+<div class="feature-card">
+<h4><i class="fas fa-info-circle"></i> Descripción</h4>
+<p>Detalles sobre qué incluye el paquete.</p>
+</div>
+</div>
+
+<h3><i class="fas fa-cart-plus"></i> Agregar al Carrito</h3>
+<ol class="step-list">
+<li>
+<strong>Requisito:</strong> Debes estar logueado para agregar productos al carrito.
+</li>
+<li>
+<strong>Agregar producto:</strong> Haz clic en el botón "Agregar" en cualquier producto.
+</li>
+<li>
+<strong>Confirmación visual:</strong> El botón cambiará a "Agregado" temporalmente.
+</li>
+<li>
+<strong>Notificación:</strong> Verás una notificación de éxito en la esquina superior derecha.
+</li>
+<li>
+<strong>Contador actualizado:</strong> El enlace "Carrito" mostrará la cantidad de productos.
+</li>
+</ol>
+
+<div class="alert alert-success">
+<i class="fas fa-check-circle"></i>
+<div>
+<strong>Productos Disponibles:</strong> El sistema incluye 5 paquetes de ejemplo con destinos como Bariloche, Mendoza y más.
+</div>
+</div>
+</div>
+
+<!-- Carrito -->
+<div id="carrito" class="section">
+<h2><i class="fas fa-shopping-cart"></i> Gestión del Carrito de Compras</h2>
+
+<h3><i class="fas fa-list"></i> Ver Contenido del Carrito</h3>
+<ol class="step-list">
+<li>
+<strong>Acceder:</strong> Haz clic en "Carrito" en la navegación superior.
+</li>
+<li>
+<strong>Vista general:</strong> Verás todos los productos agregados con:
+<ul style="margin-top: 0.5rem;">
+<li>Imagen y categoría del producto</li>
+<li>Nombre y descripción</li>
+<li>Destino (si aplica)</li>
+<li>Cantidad seleccionada</li>
+<li>Precio unitario y subtotal</li>
+</ul>
+</li>
+</ol>
+
+<h3><i class="fas fa-edit"></i> Modificar Cantidades</h3>
+<ol class="step-list">
+<li>
+<strong>Controles de cantidad:</strong> Usa los botones + y - para ajustar cantidades.
+</li>
+<li>
+<strong>Límites:</strong> Mínimo 1, máximo 10 productos por item.
+</li>
+<li>
+<strong>Actualizar:</strong> Haz clic en "Actualizar" para confirmar los cambios.
+</li>
+<li>
+<strong>Recálculo automático:</strong> Los totales se actualizan automáticamente.
+</li>
+</ol>
+
+<h3><i class="fas fa-trash"></i> Eliminar Productos</h3>
+<ol class="step-list">
+<li>
+<strong>Botón eliminar:</strong> Cada producto tiene un botón rojo con ícono de basura.
+</li>
+<li>
+<strong>Confirmación:</strong> El sistema pedirá confirmación antes de eliminar.
+</li>
+<li>
+<strong>Actualización:</strong> El carrito se actualiza inmediatamente.
+</li>
+</ol>
+
+<h3><i class="fas fa-receipt"></i> Resumen de Compra</h3>
+<p>El panel lateral derecho muestra:</p>
+<ul>
+<li><strong>Cantidad de productos:</strong> Total de items en el carrito</li>
+<li><strong>Subtotal:</strong> Suma de todos los productos</li>
+<li><strong>Envío:</strong> Gratis en todos los paquetes</li>
+<li><strong>Total final:</strong> Monto a pagar</li>
+<li><strong>Garantías:</strong> Compra segura y cancelación gratuita</li>
+</ul>
+
+<div class="alert alert-warning">
+<i class="fas fa-exclamation-triangle"></i>
+<div>
+<strong>Carrito Vacío:</strong> Si no tienes productos, verás un mensaje con enlace directo al catálogo de paquetes.
+</div>
+</div>
+</div>
+
+<!-- Checkout -->
+<div id="checkout" class="section">
+<h2><i class="fas fa-credit-card"></i> Proceso de Pago</h2>
+
+<h3><i class="fas fa-play"></i> Iniciar Checkout</h3>
+<ol class="step-list">
+<li>
+<strong>Desde el carrito:</strong> Haz clic en "Proceder al Pago" cuando tengas productos en el carrito.
+</li>
+<li>
+<strong>Verificación:</strong> El sistema verifica que tengas productos antes de continuar.
+</li>
+<li>
+<strong>Redirección:</strong> Serás llevado a la página de checkout segura.
+</li>
+</ol>
+
+<h3><i class="fas fa-credit-card"></i> Información de Pago</h3>
+<p>Completa el formulario de tarjeta de crédito:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Campo</th>
+<th>Formato</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nombre en la tarjeta</td>
+<td>Texto completo</td>
+<td>Juan Pérez</td>
+</tr>
+<tr>
+<td>Número de tarjeta</td>
+<td>16 dígitos (se formatea automáticamente)</td>
+<td>4111 1111 1111 1111</td>
+</tr>
+<tr>
+<td>Mes de vencimiento</td>
+<td>01-12</td>
+<td>12</td>
+</tr>
+<tr>
+<td>Año de vencimiento</td>
+<td>Año actual en adelante</td>
+<td>2025</td>
+</tr>
+<tr>
+<td>CVV</td>
+<td>3-4 dígitos</td>
+<td>123</td>
+</tr>
+</tbody>
+</table>
+
+<div class="alert alert-info">
+<i class="fas fa-credit-card"></i>
+<div>
+<strong>Datos de Prueba:</strong><br>
+• <strong>Tarjeta:</strong> 4111 1111 1111 1111<br>
+• <strong>CVV:</strong> 123<br>
+• <strong>Fecha:</strong> Cualquier fecha futura<br>
+• <strong>Nombre:</strong> Cualquier nombre
+</div>
+</div>
+
+<h3><i class="fas fa-shield-alt"></i> Procesamiento Seguro</h3>
+<ol class="step-list">
+<li>
+<strong>Validación:</strong> El sistema valida todos los campos antes de procesar.
+</li>
+<li>
+<strong>Simulación de pago:</strong> Se simula un procesamiento real sin cobros reales.
+</li>
+<li>
+<strong>Generación de pedido:</strong> Se crea un número de pedido único (formato: QT-YYYYMMDD-XXXX).
+</li>
+<li>
+<strong>Confirmación:</strong> Recibes confirmación inmediata en pantalla.
+</li>
+<li>
+<strong>Email automático:</strong> Se envía email de confirmación con todos los detalles.
+</li>
+</ol>
+
+<h3><i class="fas fa-check-circle"></i> Confirmación de Compra</h3>
+<p>Después del pago exitoso verás:</p>
+<ul>
+<li>Mensaje de éxito con número de pedido</li>
+<li>Confirmación de email enviado</li>
+<li>Botones para volver al inicio o seguir explorando</li>
+<li>El carrito se vacía automáticamente</li>
+</ul>
+</div>
+
+<!-- Consultas -->
+<div id="consultas" class="section">
+<h2><i class="fas fa-envelope"></i> Sistema de Consultas</h2>
+
+<h3><i class="fas fa-map-marker-alt"></i> Ubicar el Formulario</h3>
+<ol class="step-list">
+<li>
+<strong>Página principal:</strong> Ve a la página de inicio (index.php).
+</li>
+<li>
+<strong>Desplazarse:</strong> Baja hasta la sección "¿Tienes Alguna Consulta?".
+</li>
+<li>
+<strong>Información de contacto:</strong> A la izquierda verás métodos de contacto alternativos.
+</li>
+<li>
+<strong>Formulario:</strong> A la derecha está el formulario de consulta.
+</li>
+</ol>
+
+<h3><i class="fas fa-edit"></i> Completar Consulta</h3>
+<table class="table">
+<thead>
+<tr>
+<th>Campo</th>
+<th>Obligatorio</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nombre Completo</td>
+<td>Sí</td>
+<td>Tu nombre y apellido</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>Sí</td>
+<td>Email válido para recibir respuesta</td>
+</tr>
+<tr>
+<td>Teléfono</td>
+<td>No</td>
+<td>Número de contacto opcional</td>
+</tr>
+<tr>
+<td>Asunto</td>
+<td>Sí</td>
+<td>Categoría de tu consulta</td>
+</tr>
+<tr>
+<td>Mensaje</td>
+<td>Sí</td>
+<td>Detalle de tu consulta o pregunta</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Tipos de Asunto Disponibles:</h4>
+<ul>
+<li><strong>Información de paquetes:</strong> Preguntas sobre destinos y servicios</li>
+<li><strong>Cotización personalizada:</strong> Solicitar presupuesto a medida</li>
+<li><strong>Modificar reserva:</strong> Cambios en reservas existentes</li>
+<li><strong>Cancelación:</strong> Solicitudes de cancelación</li>
+<li><strong>Reclamo:</strong> Problemas o quejas</li>
+<li><strong>Otros:</strong> Cualquier otra consulta</li>
+</ul>
+
+<h3><i class="fas fa-paper-plane"></i> Envío y Confirmación</h3>
+<ol class="step-list">
+<li>
+<strong>Validación:</strong> El sistema verifica que todos los campos obligatorios estén completos.
+</li>
+<li>
+<strong>Almacenamiento:</strong> La consulta se guarda en la base de datos.
+</li>
+<li>
+<strong>Email automático:</strong> Recibes confirmación por email inmediatamente.
+</li>
+<li>
+<strong>Tiempo de respuesta:</strong> Te responderemos en máximo 24 horas hábiles.
+</li>
+</ol>
+
+<div class="alert alert-success">
+<i class="fas fa-clock"></i>
+<div>
+<strong>Tiempo de Respuesta:</strong> Nuestro equipo responde consultas en un máximo de 24 horas durante días hábiles.
+</div>
+</div>
+</div>
+
+<!-- Emails -->
+<div id="emails" class="section">
+<h2><i class="fas fa-mail-bulk"></i> Sistema de Emails</h2>
+
+<h3><i class="fas fa-cog"></i> Funcionamiento en XAMPP</h3>
+<p>Debido a que XAMPP no tiene configuración de email por defecto, el sistema funciona de la siguiente manera:</p>
+
+<ol class="step-list">
+<li>
+<strong>Generación de archivos:</strong> Los emails se crean como archivos HTML en la carpeta <code>emails_simulados/</code>.
+</li>
+<li>
+<strong>Visualización:</strong> Puedes abrir estos archivos en cualquier navegador para ver cómo se verían los emails reales.
+</li>
+<li>
+<strong>Logs detallados:</strong> Toda la actividad se registra en los logs de PHP para debugging.
+</li>
+<li>
+<strong>Compatibilidad futura:</strong> El código está preparado para envío real cuando se configure SMTP.
+</li>
+</ol>
+
+<h3><i class="fas fa-envelope-open"></i> Tipos de Email</h3>
+<div class="feature-grid">
+<div class="feature-card">
+<h4><i class="fas fa-question-circle"></i> Email de Consulta</h4>
+<p><strong>Cuándo se envía:</strong> Al completar el formulario de consultas</p>
+<p><strong>Contenido:</strong></p>
+<ul>
+<li>Confirmación de recepción</li>
+<li>Detalles de la consulta enviada</li>
+<li>Número de referencia único</li>
+<li>Tiempo estimado de respuesta</li>
+<li>Información de contacto alternativa</li>
+</ul>
+</div>
+<div class="feature-card">
+<h4><i class="fas fa-shopping-cart"></i> Email de Compra</h4>
+<p><strong>Cuándo se envía:</strong> Al completar una compra exitosa</p>
+<p><strong>Contenido:</strong></p>
+<ul>
+<li>Confirmación de pago procesado</li>
+<li>Número de pedido único</li>
+<li>Detalle completo de productos</li>
+<li>Total pagado</li>
+<li>Próximos pasos del proceso</li>
+<li>Información de contacto</li>
+</ul>
+</div>
+</div>
+
+<h3><i class="fas fa-eye"></i> Ver Emails Generados</h3>
+<ol class="step-list">
+<li>
+<strong>Acceso directo:</strong> Ve a <code>ver_emails.php</code> en tu navegador.
+</li>
+<li>
+<strong>Requisitos:</strong> Debes estar logueado como administrador o en localhost.
+</li>
+<li>
+<strong>Lista de emails:</strong> Verás todos los emails generados ordenados por fecha.
+</li>
+<li>
+<strong>Visualización:</strong> Haz clic en "Ver Email" para abrir cada email en una nueva pestaña.
+</li>
+</ol>
+
+<div class="alert alert-info">
+<i class="fas fa-folder"></i>
+<div>
+<strong>Ubicación de archivos:</strong> Los emails se guardan en <code>/emails_simulados/</code> con nombres descriptivos que incluyen fecha y tipo.
+</div>
+</div>
+
+<h3><i class="fas fa-server"></i> Configuración para Emails Reales</h3>
+<p>Si quieres configurar envío real de emails, consulta el archivo <code>config/xampp_email_setup.php</code> que incluye:</p>
+<ul>
+<li>Configuración de Gmail SMTP</li>
+<li>Configuración de sendmail en XAMPP</li>
+<li>Uso de servicios como Mailtrap para testing</li>
+<li>Ejemplo con PHPMailer</li>
+</ul>
+</div>
+
+<!-- Admin -->
+<div id="admin" class="section">
+<h2><i class="fas fa-cog"></i> Panel Administrativo</h2>
+
+<h3><i class="fas fa-key"></i> Acceso al Panel</h3>
+<ol class="step-list">
+<li>
+<strong>Requisitos:</strong> Debes estar logueado como vendedor o administrador.
+</li>
+<li>
+<strong>Navegación:</strong> El enlace "Admin" aparecerá en la barra de navegación.
+</li>
+<li>
+<strong>Acceso:</strong> Haz clic en "Admin" para acceder al panel de control.
+</li>
+</ol>
+
+<h3><i class="fas fa-users"></i> Gestión de Usuarios</h3>
+<p>Funcionalidades disponibles para administradores:</p>
+<ul>
+<li>Ver lista completa de usuarios registrados</li>
+<li>Filtrar por tipo de usuario (cliente, vendedor, admin)</li>
+<li>Activar/desactivar cuentas de usuario</li>
+<li>Cambiar roles de usuario</li>
+<li>Ver estadísticas de registro</li>
+</ul>
+
+<h3><i class="fas fa-box"></i> Gestión de Productos</h3>
+<p>Control completo del catálogo:</p>
+<ul>
+<li>Agregar nuevos paquetes turísticos</li>
+<li>Editar información de productos existentes</li>
+<li>Activar/desactivar productos</li>
+<li>Gestionar precios y disponibilidad</li>
+<li>Organizar por categorías</li>
+</ul>
+
+<h3><i class="fas fa-chart-bar"></i> Reportes y Estadísticas</h3>
+<ul>
+<li>Ventas por período</li>
+<li>Productos más vendidos</li>
+<li>Consultas recibidas</li>
+<li>Usuarios activos</li>
+<li>Ingresos totales</li>
+</ul>
+
+<div class="alert alert-warning">
+<i class="fas fa-exclamation-triangle"></i>
+<div>
+<strong>Nota:</strong> El panel administrativo completo está en desarrollo. Actualmente puedes acceder con las cuentas de prueba para ver la estructura básica.
+</div>
+</div>
+</div>
+
+<!-- Soporte -->
+<div id="soporte" class="section">
+<h2><i class="fas fa-life-ring"></i> Soporte Técnico</h2>
+
+<h3><i class="fas fa-bug"></i> Problemas Comunes</h3>
+<div class="feature-grid">
+<div class="feature-card">
+<h4><i class="fas fa-sign-in-alt"></i> No puedo iniciar sesión</h4>
+<ul>
+<li>Verifica que el email esté escrito correctamente</li>
+<li>Asegúrate de que la contraseña sea la correcta</li>
+<li>Usa las cuentas de prueba si es necesario</li>
+<li>Limpia la caché del navegador</li>
+</ul>
+</div>
+<div class="feature-card">
+<h4><i class="fas fa-shopping-cart"></i> El carrito no funciona</h4>
+<ul>
+<li>Debes estar logueado para usar el carrito</li>
+<li>Verifica que JavaScript esté habilitado</li>
+<li>Revisa la consola del navegador para errores</li>
+<li>Intenta refrescar la página</li>
+</ul>
+</div>
+<div class="feature-card">
+<h4><i class="fas fa-envelope"></i> No recibo emails</h4>
+<ul>
+<li>Los emails se guardan como archivos HTML</li>
+<li>Ve a <code>ver_emails.php</code> para verlos</li>
+<li>Revisa la carpeta <code>emails_simulados/</code></li>
+<li>Consulta los logs de PHP para más detalles</li>
+</ul>
+</div>
+<div class="feature-card">
+<h4><i class="fas fa-credit-card"></i> Error en el pago</h4>
+<ul>
+<li>Usa los datos de prueba proporcionados</li>
+<li>Verifica que todos los campos estén completos</li>
+<li>El número de tarjeta debe tener 16 dígitos</li>
+<li>El CVV debe tener 3-4 dígitos</li>
+</ul>
+</div>
+</div>
+
+<h3><i class="fas fa-tools"></i> Requisitos del Sistema</h3>
+<table class="table">
+<thead>
+<tr>
+<th>Componente</th>
+<th>Versión Mínima</th>
+<th>Recomendado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PHP</td>
+<td>7.4</td>
+<td>8.0+</td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td>5.7</td>
+<td>8.0+</td>
+</tr>
+<tr>
+<td>Apache</td>
+<td>2.4</td>
+<td>2.4+</td>
+</tr>
+<tr>
+<td>Navegador</td>
+<td>Chrome 80+, Firefox 75+</td>
+<td>Última versión</td>
+</tr>
+</tbody>
+</table>
+
+<h3><i class="fas fa-database"></i> Configuración de Base de Datos</h3>
+<ol class="step-list">
+<li>
+<strong>Crear base de datos:</strong> Ejecuta el script <code>scripts/database-setup.sql</code> en phpMyAdmin.
+</li>
+<li>
+<strong>Configurar conexión:</strong> Verifica los datos en <code>config/database.php</code>.
+</li>
+<li>
+<strong>Datos de prueba:</strong> El script incluye usuarios y productos de ejemplo.
+</li>
+<li>
+<strong>Tabla de consultas:</strong> Ejecuta también <code>scripts/add-consultas-table.sql</code>.
+</li>
+</ol>
+
+<h3><i class="fas fa-phone"></i> Contacto de Soporte</h3>
+<div class="alert alert-info">
+<i class="fas fa-envelope"></i>
+<div>
+<strong>¿Necesitas ayuda adicional?</strong><br>
+• <strong>Email:</strong> soporte@quantumtour.com<br>
+• <strong>Teléfono:</strong> +54 11 4567-8900<br>
+• <strong>WhatsApp:</strong> +54 9 11 1234-5678<br>
+• <strong>Horarios:</strong> Lun-Vie 9:00-18:00
+</div>
+</div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+<p><strong>Manual de Usuario - Quantum Tour v1.0</strong></p>
+<p>Sistema de Reservas de Viajes | Desarrollado con PHP, MySQL, JavaScript</p>
+<p>© 2024 Quantum Tour. Todos los derechos reservados.</p>
+<div style="margin-top: 1rem;">
+<a href="index.php" class="btn btn-secondary">
+<i class="fas fa-home"></i> Volver al Sistema
+</a>
+</div>
+</div>
+</div>
+
+<!-- Script para smooth scrolling y efectos -->
+<script>
+// Smooth scrolling para enlaces internos
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function (e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+target.scrollIntoView({
+behavior: 'smooth',
+block: 'start'
+});
+}
+});
+});
+
+// Highlight de sección activa
+const sections = document.querySelectorAll('.section');
+const tocLinks = document.querySelectorAll('.toc a');
+
+function highlightActiveSection() {
+let current = '';
+sections.forEach(section => {
+const sectionTop = section.offsetTop;
+const sectionHeight = section.clientHeight;
+if (pageYOffset >= sectionTop - 100) {
+current = section.getAttribute('id');
+}
+});
+
+tocLinks.forEach(link => {
+link.parentElement.style.background = '';
+if (link.getAttribute('href') === '#' + current) {
+link.parentElement.style.background = 'var(--primary-color)';
+link.parentElement.style.borderColor = 'var(--primary-color)';
+}
+});
+}
+
+window.addEventListener('scroll', highlightActiveSection);
+
+// Botón para volver arriba
+const backToTop = document.createElement('button');
+backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
+backToTop.style.cssText = `
+position: fixed;
+bottom: 2rem;
+right: 2rem;
+background: var(--primary-color);
+color: white;
+border: none;
+border-radius: 50%;
+width: 50px;
+height: 50px;
+cursor: pointer;
+display: none;
+z-index: 1000;
+transition: all 0.3s ease;
+`;
+
+backToTop.addEventListener('click', () => {
+window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+window.addEventListener('scroll', () => {
+if (window.pageYOffset > 300) {
+backToTop.style.display = 'block';
+} else {
+backToTop.style.display = 'none';
+}
+});
+
+document.body.appendChild(backToTop);
+</script>
+</body>
+</html>
