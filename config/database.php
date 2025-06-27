@@ -4,21 +4,27 @@ class Database {
     private $db_name = 'turismo_db_3qxb';
     private $username = 'tecnica4';
     private $password = 'K51Kdg9Cfv6ftSETX3uZfcpy5ALbXgg5';
-    private $port =  '5432';
+    private $port = '5432';
     private $conn;
 
     public function getConnection() {
         $this->conn = null;
-    try {
-        $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $user, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        // echo "Conexión exitosa"; // Opcional para debug
-    } catch (PDOException $e) {
-        echo "Error de conexión: " . $e->getMessage();
-        exit;
+        try {
+            $this->conn = new PDO(
+                "pgsql:host={$this->host};port={$this->port};dbname={$this->db_name}",
+                $this->username,
+                $this->password
+            );
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // echo "Conexión exitosa";
+        } catch (PDOException $e) {
+            echo "Error de conexión: " . $e->getMessage();
+            exit;
+        }
+
+        return $this->conn;
     }
-    }
-  }
+}
 
     // Iniciar sesión
 session_start();
