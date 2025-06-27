@@ -1,32 +1,28 @@
 <?php
 class Database {
-    private $host = 'dpg-d1f0637fte5s73aa3cl0-a';
-    private $db_name = 'turismo_db_3qxb';
-    private $username = 'tecnica4';
-    private $password = 'K51Kdg9Cfv6ftSETX3uZfcpy5ALbXgg5';
-    private $port = '5432';
+    private $host = 'localhost';
+    private $db_name = 'turismo_db';
+    private $username = 'root';
+    private $password = '';
     private $conn;
 
-   public function getConnection() {
-    $this->conn = null;
-    try {
-        $this->conn = new PDO(
-            "pgsql:host={$this->host};port={$this->port};dbname={$this->db_name}",
-            $this->username,
-            $this->password
-        );
-        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        // echo "Conexión exitosa";
-    } catch (PDOException $e) {
-        echo "Error de conexión: " . $e->getMessage();
-        exit;
+    public function getConnection() {
+        $this->conn = null;
+        try {
+            $this->conn = new PDO(
+                "mysql:host=" . $this->host . ";dbname=" . $this->db_name . ";charset=utf8mb4",
+                $this->username,
+                $this->password,
+                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+            );
+        } catch(PDOException $exception) {
+            echo "Error de conexión: " . $exception->getMessage();
+        }
+        return $this->conn;
     }
-
-    return $this->conn;
-}
 }
 
-    // Iniciar sesión
+// Iniciar sesión
 session_start();
 
 // Funciones auxiliares
