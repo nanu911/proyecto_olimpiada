@@ -1,36 +1,39 @@
 -- Crear base de datos
-CREATE DATABASE turismo_db WITH ENCODING 'UTF8';
-
--- Conectarse a la base de datos (esto se hace desde la línea de comandos o herramienta de gestión)
--- \c turismo_db
+CREATE DATABASE IF NOT EXISTS turismo_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE turismo_db;
 
 -- Tabla de usuarios
 CREATE TABLE usuarios (
-    id SERIAL PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     telefono VARCHAR(20),
-    tipo_usuario VARCHAR(20) CHECK (tipo_usuario IN ('cliente', 'vendedor', 'admin')) DEFAULT 'cliente',
+    tipo_usuario ENUM('cliente', 'vendedor', 'admin') DEFAULT 'cliente',
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     activo BOOLEAN DEFAULT TRUE
 );
 
 -- Tabla de productos turísticos
 CREATE TABLE productos (
-    id SERIAL PRIMARY KEY,
-    nombre VARCHAR(100),
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    codigo VARCHAR(50) UNIQUE NOT NULL,
+    nombre VARCHAR(200) NOT NULL,
     descripcion TEXT,
-    precio NUMERIC(10,2),
-    disponible BOOLEAN,
+    precio DECIMAL(10,2) NOT NULL,
+    categoria ENUM('hotel', 'vuelo', 'paquete', 'auto', 'excursion') NOT NULL,
+    destino VARCHAR(100),
+    duracion_dias INT,
+    disponible BOOLEAN DEFAULT TRUE,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 -- Tabla de carrito
 CREATE TABLE carrito (
-    id SERIAL PRIMARY KEY,
-    usuario_id INTEGER NOT NULL,
-    producto_id INTEGER NOT NULL,
-    cantidad INTEGER DEFAULT 1,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    producto_id INT NOT NULL,
+    cantidad INT DEFAULT 1,
     precio_unitario DECIMAL(10,2) NOT NULL,
     fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
@@ -39,11 +42,11 @@ CREATE TABLE carrito (
 
 -- Tabla de pedidos
 CREATE TABLE pedidos (
-    id SERIAL PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     numero_pedido VARCHAR(20) UNIQUE NOT NULL,
-    usuario_id INTEGER NOT NULL,
+    usuario_id INT NOT NULL,
     total DECIMAL(10,2) NOT NULL,
-    estado VARCHAR(20) CHECK (estado IN ('pendiente', 'procesando', 'entregado', 'cancelado')) DEFAULT 'pendiente',
+    estado ENUM('pendiente', 'procesando', 'entregado', 'cancelado') DEFAULT 'pendiente',
     fecha_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_entrega TIMESTAMP NULL,
     notas TEXT,
@@ -52,10 +55,10 @@ CREATE TABLE pedidos (
 
 -- Tabla de detalle de pedidos
 CREATE TABLE pedidos_detalle (
-    id SERIAL PRIMARY KEY,
-    pedido_id INTEGER NOT NULL,
-    producto_id INTEGER NOT NULL,
-    cantidad INTEGER NOT NULL,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pedido_id INT NOT NULL,
+    producto_id INT NOT NULL,
+    cantidad INT NOT NULL,
     precio_unitario DECIMAL(10,2) NOT NULL,
     subtotal DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (pedido_id) REFERENCES pedidos(id) ON DELETE CASCADE,
@@ -63,20 +66,21 @@ CREATE TABLE pedidos_detalle (
 );
 
 -- Agregar tabla de consultas
-CREATE TABLE consultas (
-    id SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS consultas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     telefono VARCHAR(20),
     asunto VARCHAR(200) NOT NULL,
     mensaje TEXT NOT NULL,
     fecha_consulta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    estado VARCHAR(20) CHECK (estado IN ('pendiente', 'respondida')) DEFAULT 'pendiente'
+    estado ENUM('pendiente', 'respondida') DEFAULT 'pendiente'
 );
+
 
 -- Tabla de configuración para emails
 CREATE TABLE configuracion (
-    id SERIAL PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     clave VARCHAR(50) UNIQUE NOT NULL,
     valor TEXT NOT NULL,
     descripcion VARCHAR(200)
@@ -96,7 +100,6 @@ INSERT INTO productos (codigo, nombre, descripcion, precio, categoria, destino, 
 ('AUTO001', 'Alquiler Auto Compacto', 'Auto por día con seguro incluido', 8000.00, 'auto', 'Nacional', 1);
 
 INSERT INTO configuracion (clave, valor, descripcion) VALUES
-('email_ventas',
-'ventas@turismo.com', 'Email del departamento de ventas'),
+('email_ventas', 'ventas@turismo.com', 'Email del departamento de ventas'),
 ('email_admin', 'admin@turismo.com', 'Email del administrador'),
 ('empresa_nombre', 'Turismo Aventura', 'Nombre de la empresa');
