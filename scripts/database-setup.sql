@@ -19,17 +19,12 @@ CREATE TABLE usuarios (
 -- Tabla de productos turísticos
 CREATE TABLE productos (
     id SERIAL PRIMARY KEY,
-    codigo VARCHAR(50) UNIQUE NOT NULL,
-    nombre VARCHAR(200) NOT NULL,
+    nombre VARCHAR(100),
     descripcion TEXT,
-    precio DECIMAL(10,2) NOT NULL,
-    categoria VARCHAR(20) CHECK (categoria IN ('hotel', 'vuelo', 'paquete', 'auto', 'excursion')) NOT NULL,
-    destino VARCHAR(100),
-    duracion_dias INTEGER,
-    disponible BOOLEAN DEFAULT TRUE,
+    precio NUMERIC(10,2),
+    disponible BOOLEAN,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
 -- Tabla de carrito
 CREATE TABLE carrito (
     id SERIAL PRIMARY KEY,
