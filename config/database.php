@@ -7,23 +7,23 @@ class Database {
     private $port = '5432';
     private $conn;
 
-    public function getConnection() {
-        $this->conn = null;
-        try {
-            $this->conn = new PDO(
-                "pgsql:host={$this->host};port={$this->port};dbname={$this->db_name}",
-                $this->username,
-                $this->password
-            );
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            // echo "Conexión exitosa";
-        } catch (PDOException $e) {
-            echo "Error de conexión: " . $e->getMessage();
-            exit;
-        }
-
-        return $this->conn;
+   public function getConnection() {
+    $this->conn = null;
+    try {
+        $this->conn = new PDO(
+            "pgsql:host={$this->host};port={$this->port};dbname={$this->db_name}",
+            $this->username,
+            $this->password
+        );
+        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // echo "Conexión exitosa";
+    } catch (PDOException $e) {
+        echo "Error de conexión: " . $e->getMessage();
+        exit;
     }
+
+    return $this->conn;
+}
 }
 
     // Iniciar sesión
