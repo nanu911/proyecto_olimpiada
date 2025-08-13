@@ -1,4 +1,4 @@
-Hola hola hola
+
 $query = "SELECT * FROM productos WHERE disponible = 1 ORDER BY fecha_creacion DESC LIMIT 6";
 $stmt = $db->prepare($query);
 $stmt->execute();
